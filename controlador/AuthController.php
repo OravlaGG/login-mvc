@@ -38,6 +38,7 @@ class AuthController                                   // la clase AuthControlle
                     if ($this->userModel->login($username, $password)) {
                         // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
                         $_SESSION['idusuario'] = $username;
+                        $_SESSION['password'] = password_hash($password, PASSWORD_DEFAULT);
                         header('Location: index.php?action=dashboard');
                         exit();
                     } else {
