@@ -32,8 +32,8 @@ class AuthController                                   // la clase AuthControlle
                 }
                 else
                 {
-                    $username = $_POST['idusuario'];
-                    $password = $_POST['password'];
+                    $username = htmlspecialchars($_POST['idusuario']);
+                    $password = htmlspecialchars($_POST['password']);
 
                     if ($this->userModel->login($username, $password)) {
                         // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
