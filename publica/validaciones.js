@@ -15,11 +15,11 @@ document.getElementById('formT').addEventListener("submit",function(event){
     }
 });
 
-document.getElementById('pass').addEventListener("change",function(){
-    limpiaError('pass');
+document.getElementById('password').addEventListener("change",function(){
+    limpiaError('password');
 });
-document.getElementById('identi').addEventListener("change",function(){
-    limpiaError('pass');
+document.getElementById('idusuario').addEventListener("change",function(){
+    limpiaError('idusuario');
 });
 
 function validarFormulario()
@@ -31,14 +31,14 @@ function validarFormulario()
 
     if (Number.isNaN(pass))
     {
-        marcarError('pass','La contraseña no puede estar vacia');
+        marcarError('password','La contraseña no puede estar vacia');
         correcto = false;
     }
     else
     {
         if(!regex.exec(pass))
         {
-            marcarError('pass','Formato de contraseña incorrecto');
+            marcarError('password','Formato de contraseña incorrecto');
             correcto = false;
 
         }
@@ -46,7 +46,7 @@ function validarFormulario()
 
     if (Number.isNaN(identi) || pass.length < 6 || pass.length > 15)
     {
-        marcarError('identi','El usuario no puede estar vacio y debe ser entre 6 a 14 caracteres');
+        marcarError('idusuario','El usuario no puede estar vacio y debe ser entre 6 a 14 caracteres');
         correcto = false;
     }
 

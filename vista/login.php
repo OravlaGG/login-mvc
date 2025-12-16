@@ -63,24 +63,24 @@ if (isset($_SESSION['usuario_logueado'])) {  // si el usuario estuviera ya logea
             <div data-mdb-input-init class="form-outline mb-4">
               <input  name="idusuario" type="idusuario" id="idusuario" class="form-control form-control-lg" />
               <label class="form-label" for="identi">Usuario</label>
-              <div id="identiHelp" class="form-text text-danger"></div>
+              <div id="idusuarioHelp" class="form-text text-danger"></div>
 
             </div>
             <div data-mdb-input-init class="form-outline mb-4">
               <input name="password" type="password" id="password" class="form-control form-control-lg" />
               <label class="form-label" for="pass">Password</label>
-              <div id="passHelp" class="form-text text-danger"></div>
+              <div id="passwordHelp" class="form-text text-danger"></div>
             </div>
             <div class="pt-1 mb-4">
               <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
               <button type="submit" class="btn btn-info btn-lg btn-block" type="button">Login</button>
-              <a class="btn btn-secondary" href="./logout.php">Log Out</a>
+              <a class="btn btn-secondary" href="index.php?action=logout">Log Out</a>
             </div>
 
           </form>
         </div>
 
-        <script src="../publica/validaciones.js"></script>
+        <script src="publica/validaciones.js"></script>
       
       </div>
       <div class="col-sm-6 px-0 d-none d-sm-block">
