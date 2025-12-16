@@ -21,19 +21,33 @@ class AuthController                                   // la clase AuthControlle
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) 
             {
-                $username = $_POST['idusuario'];
-                $password = $_POST['password'];
-
-                if ($this->userModel->login($username, $password)) {
-                    // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
-                    $_SESSION['idusuario'] = $username;
-                    header('Location: index.php?action=dashboard');
-                    exit();
-                } else {
-                    // Autenticación fallida, recargar login con error que mostraría mensaje
-                    $_GET['error'] = "Usuario o contraseña incorrectos.";
+                if (!isset($_SESSION['intentos']))
+                {
+                    $_SESSION['intentos'] = 0;
+                }
+                if($_SESSION['intentos'] >= 5)
+                {
+                    $_GET['error'] = "Numero de Intentos fallidos sobrepasados";
                     include 'vista/login.php';
                 }
+                else
+                {
+                    $username = $_POST['idusuario'];
+                    $password = $_POST['password'];
+
+                    if ($this->userModel->login($username, $password)) {
+                        // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
+                        $_SESSION['idusuario'] = $username;
+                        header('Location: index.php?action=dashboard');
+                        exit();
+                    } else {
+                        // Autenticación fallida, recargar login con error que mostraría mensaje
+                        $_GET['error'] = "Usuario o contraseña incorrectos.";
+                        $_SESSION['intentos']++;
+                        include 'vista/login.php';
+                    }
+                }
+                
             }
             else
             {
